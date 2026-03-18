@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Mel</title>
+
+
+<style>
+ 
+       body {
+            font-family: Arial;
+            background-color: #a06e8b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculadora {
+            background-color: #941a6bc9;
+            padding: 120px;
+            border-radius: 20px;
+        }
+
+        #display {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+            font-size: 20px;
+            text-align: right;
+            padding: 10px;
+        }
+
+        button {
+            width: 80px;
+            height: 80px;
+            margin: 15px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .linha {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="calculadora">
+
+    <input type="text" id="display" disabled>
+
+    <div class="linha">
+        <button onclick="adicionarNumero(7)">7</button>
+        <button onclick="adicionarNumero(8)">8</button>
+        <button onclick="adicionarNumero(9)">9</button>
+        <button onclick="definirOperacao('/')">÷</button>
+    </div>
+
+    <div class="linha">
+        <button onclick="adicionarNumero(4)">4</button>
+        <button onclick="adicionarNumero(5)">5</button>
+        <button onclick="adicionarNumero(6)">6</button>
+        <button onclick="definirOperacao('*')">×</button>
+    </div>
+
+    <div class="linha">
+        <button onclick="adicionarNumero(1)">1</button>
+        <button onclick="adicionarNumero(2)">2</button>
+        <button onclick="adicionarNumero(3)">3</button>
+        <button onclick="definirOperacao('-')">−</button>
+    </div>
+
+    <div class="linha">
+        <button onclick="adicionarNumero(0)">0</button>
+        <button onclick="limpar()">C</button>
+        <button onclick="calcular()">=</button>
+        <button onclick="definirOperacao('+')">+</button>
+    </div>
+
+</div>
+
+<script>
+    let numero1 = "";
+    let numero2 = "";
+    let operacao = "";
+
+    function adicionarNumero(num) {
+        if (operacao === "") {
+            numero1 += num;
+            document.getElementById("display").value = numero1;
+        } else {
+            numero2 += num;
+            document.getElementById("display").value = numero2;
+        }
+    }
+
+    function definirOperacao(op) {
+        if (numero1 !== "") {
+            operacao = op;
+        }
+    }
+
+    function calcular() {
+        let resultado;
+
+        let n1 = parseFloat(numero1);
+        let n2 = parseFloat(numero2);
+
+        if (operacao === "+") {
+            resultado = n1 + n2;
+        } else if (operacao === "-") {
+            resultado = n1 - n2;
+        } else if (operacao === "*") {
+            resultado = n1 * n2;
+        } else if (operacao === "/") {
+            resultado = n2 !== 0 ? n1 / n2 : "Erro";
+        }
+
+        document.getElementById("display").value = resultado;
+
+        numero1 = resultado.toString();
+        numero2 = "";
+        operacao = "";
+    }
+
+    function limpar() {
+        numero1 = "";
+        numero2 = "";
+        operacao = "";
+        document.getElementById("display").value = "";
+    }
+</script>
+
+</body>
+</html>
